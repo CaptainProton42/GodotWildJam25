@@ -1,0 +1,204 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scripts/LineDrawing2D.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/foot.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/draw_yourself.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/inkpen.png" type="Texture" id=4]
+[ext_resource path="res://scenes/InkCartridge.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/InkEraser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/CharacterCreator.gd" type="Script" id=7]
+[ext_resource path="res://scenes/LabeledButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sounds/turn_page.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/textures/creator_background.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/confetti.png" type="Texture" id=11]
+[ext_resource path="res://assets/sounds/drawing.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/textures/character_creator_outline.png" type="Texture" id=16]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float bluriness = 2.5f;
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, bluriness);
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/bluriness = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "open"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -750 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:material:shader_param/bluriness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.001, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
+[node name="CharacterCreator" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -750.0
+margin_bottom = -750.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_right = 5000.0
+margin_bottom = 5000.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = 316.128
+margin_top = 83.1831
+margin_right = 1040.13
+margin_bottom = 807.183
+rect_scale = Vector2( 0.877024, 0.877024 )
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InkCartridge" parent="." instance=ExtResource( 5 )]
+margin_left = 774.165
+margin_top = 221.892
+margin_right = 874.165
+margin_bottom = 580.892
+rect_scale = Vector2( 0.85, 0.85 )
+line_drawing = NodePath("../LineDrawing")
+
+[node name="LineDrawing" type="Control" parent="."]
+margin_left = 454.99
+margin_top = 227.45
+margin_right = 754.991
+margin_bottom = 527.45
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+line_tex = ExtResource( 4 )
+line_width = 15.0
+available_ink = 1000.0
+line_color = Color( 0.564706, 0.72549, 1, 1 )
+audio_stream = ExtResource( 12 )
+
+[node name="Frame" type="TextureRect" parent="."]
+margin_left = 435.243
+margin_top = 208.681
+margin_right = 773.243
+margin_bottom = 546.681
+mouse_filter = 2
+texture = ExtResource( 16 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InkEraser" parent="." instance=ExtResource( 6 )]
+margin_left = 817.644
+margin_top = 146.175
+margin_right = 817.644
+margin_bottom = 146.175
+line_drawing = NodePath("../LineDrawing")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = 953.419
+margin_top = 71.8723
+margin_right = 1084.42
+margin_bottom = 228.872
+rect_rotation = 119.584
+rect_scale = Vector2( 1.27313, 1.27313 )
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmButton" parent="." instance=ExtResource( 8 )]
+self_modulate = Color( 0.85098, 0.984314, 0.52549, 1 )
+margin_left = 727.322
+margin_top = 536.689
+margin_right = 1594.32
+margin_bottom = 897.689
+rect_scale = Vector2( 0.15, 0.15 )
+button_text = "Confirm"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/open = SubResource( 3 )
+
+[node name="FakePlayer" type="Node2D" parent="."]
+position = Vector2( 621.283, 368.729 )
+
+[node name="FootPivot" type="Node2D" parent="FakePlayer"]
+position = Vector2( 0, 100 )
+
+[node name="FootLPivot" type="Node2D" parent="FakePlayer/FootPivot"]
+position = Vector2( 46.6755, 9.60107 )
+
+[node name="FootL" type="Sprite" parent="FakePlayer/FootPivot/FootLPivot"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+offset = Vector2( 10.5578, 0 )
+
+[node name="FootRPivot" type="Node2D" parent="FakePlayer/FootPivot"]
+position = Vector2( -47.0214, 24.9655 )
+
+[node name="FootR" type="Sprite" parent="FakePlayer/FootPivot/FootRPivot"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+offset = Vector2( 10.5578, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 367.05
+margin_top = 114.035
+margin_right = 862.05
+margin_bottom = 277.035
+rect_rotation = -12.9424
+rect_scale = Vector2( 0.554328, 0.554328 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )

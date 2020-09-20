@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/textures/scissors.png" type="Texture" id=1]
+
+[node name="Scissors" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.597768, 0.597768 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 386.017, -123.71, 11.6758, -51.3114, -110.673, -64.2197, -181.949, -122.027, -284.654, -160.751, -348.635, -127.639, -363.788, -69.2708, -336.287, -18.76, -311.032, -1.9231, -314.961, 16.0363, -348.073, 16.0363, -393.533, 36.8018, -403.635, 80.0166, -378.38, 131.089, -283.532, 170.375, -153.326, 155.783, -83.1723, 78.3329, 31.8801, 33.4344, 405.66, -99.0161, 409.589, -106.312, 409.589, -114.169 )

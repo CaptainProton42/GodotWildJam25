@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/goal_flag.png" type="Texture" id=1]
+[ext_resource path="res://scripts/GoalFlag.gd" type="Script" id=2]
+
+[node name="GoalFlag" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.27862, 0.27862 )
+texture = ExtResource( 1 )

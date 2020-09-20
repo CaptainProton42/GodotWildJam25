@@ -1,0 +1,164 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/LabeledButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/clear_screen.png" type="Texture" id=2]
+[ext_resource path="res://scripts/LevelClearMessage.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/turn_page.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/horn.wav" type="AudioStream" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float bluriness = 2.5f;
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, bluriness);
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/bluriness = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("ButtonContinue:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.25, 0.25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ButtonRetry:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.25, 0.25 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:material:shader_param/bluriness")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TextureRect:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -800, 32 ), Vector2( 280, 32 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.001, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ButtonContinue:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ButtonRetry:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
+[node name="LevelClearMessage" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 640.0 ]
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContinue" parent="." instance=ExtResource( 1 )]
+visible = false
+self_modulate = Color( 0.85098, 0.984314, 0.52549, 1 )
+margin_left = 320.0
+margin_top = 240.0
+margin_right = 1187.0
+margin_bottom = 601.0
+rect_pivot_offset = Vector2( 433, 180 )
+button_text = "Continue"
+
+[node name="ButtonRetry" parent="." instance=ExtResource( 1 )]
+visible = false
+self_modulate = Color( 0.984314, 0.52549, 0.52549, 1 )
+margin_left = 80.0
+margin_top = 240.0
+margin_right = 947.0
+margin_bottom = 601.0
+rect_pivot_offset = Vector2( 433, 180 )
+button_text = "Retry"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -800.0
+margin_top = 32.0
+margin_right = -78.0001
+margin_bottom = 411.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/open = SubResource( 3 )
+
+[node name="AudioPaper" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="AudioHorn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )

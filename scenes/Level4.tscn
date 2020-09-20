@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/LineDrawing2D.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/drawing.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/Props/Hoop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Cake.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Props/Paperclip.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/InkCartridge.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Props/SmallTape.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/textures/ballgoeshere.png" type="Texture" id=9]
+[ext_resource path="res://scenes/LongPencil.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/textures/inkpen.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/wrinkels.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/quad_paper.png" type="Texture" id=14]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[node name="World" type="Node2D"]
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2( 186.918, 619.546 )
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Paper" type="TextureRect" parent="Background"]
+margin_right = 14681.0
+margin_bottom = 10289.0
+rect_scale = Vector2( 0.15, 0.15 )
+mouse_filter = 2
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wrinkles" type="TextureRect" parent="Background"]
+margin_top = -4.0
+margin_right = 2597.0
+margin_bottom = 1471.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hints" type="Node2D" parent="Background"]
+
+[node name="BallGoesHere" type="Sprite" parent="Background/Hints"]
+position = Vector2( 1058.76, 195.108 )
+rotation = -0.200491
+scale = Vector2( 0.340611, 0.340611 )
+texture = ExtResource( 9 )
+
+[node name="InkCartridge" parent="." instance=ExtResource( 7 )]
+margin_left = 1192.25
+margin_top = 468.074
+margin_right = 1292.25
+margin_bottom = 827.074
+rect_scale = Vector2( 0.686565, 0.686565 )
+min_value = -4.0
+line_drawing = NodePath("../LineDrawing2D")
+
+[node name="LineDrawing2D" type="Control" parent="."]
+margin_right = 2583.0
+margin_bottom = 1461.0
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+physics_mode = 1
+line_tex = ExtResource( 11 )
+available_ink = 1500.0
+line_color = Color( 0.564706, 0.72549, 1, 1 )
+audio_stream = ExtResource( 2 )
+
+[node name="GoalFlag" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1096.08, 249.479 )
+scale = Vector2( 0.363832, 0.363832 )
+
+[node name="LongPencil" parent="." instance=ExtResource( 10 )]
+position = Vector2( 356.762, 688.551 )
+rotation = -0.0297262
+
+[node name="LongPencil3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 880.612, 689.495 )
+rotation = -0.0214729
+
+[node name="Paperclip" parent="." instance=ExtResource( 6 )]
+position = Vector2( 407.731, 312.889 )
+rotation = -0.132302
+scale = Vector2( 0.218824, 0.218824 )
+
+[node name="Paperclip2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 630.486, 261.92 )
+rotation = 0.229041
+scale = Vector2( 0.218824, 0.218824 )
+
+[node name="LongPencil2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 355.818, 561.128 )
+rotation = 0.229091
+physics_material_override = SubResource( 1 )
+
+[node name="SmallTape" parent="." instance=ExtResource( 8 )]
+modulate = Color( 0.87451, 1, 0.592157, 1 )
+position = Vector2( 891.39, 266.719 )
+rotation = -0.111934
+scale = Vector2( 0.554399, 0.554399 )
+
+[node name="SmallTape2" parent="." instance=ExtResource( 8 )]
+modulate = Color( 0.854902, 0.592157, 1, 1 )
+position = Vector2( 1023.24, 284.698 )
+rotation = -0.000738531
+scale = Vector2( 0.554399, 0.554399 )
+
+[node name="Cake" parent="." instance=ExtResource( 4 )]
+position = Vector2( 162.346, 456.835 )
+rotation = 0.241177

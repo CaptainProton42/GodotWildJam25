@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/textures/ink_eraser.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/ink_eraser_shadow.png" type="Texture" id=2]
+[ext_resource path="res://scripts/ShadowedTextureRect.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/ink_eraser_cap.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/ink_eraser_cap_shadow.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ShadowedTextureRect.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/InkEraser.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "mouseover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Eraser:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -141.588, 82.2137 ), Vector2( -168.489, 103.451 ) ]
+}
+
+[node name="InkEraser" type="Control"]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Eraser" type="TextureRect" parent="."]
+margin_left = -141.588
+margin_top = 82.2137
+margin_right = 678.412
+margin_bottom = 262.214
+rect_rotation = -38.6425
+rect_scale = Vector2( 0.270359, 0.270359 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shadow_texture = ExtResource( 2 )
+shadow_distance = 0.0
+shadow_direction = Vector2( 0, 1 )
+
+[node name="Cap" parent="." instance=ExtResource( 6 )]
+margin_left = -268.213
+margin_top = 6.1301
+margin_right = 281.787
+margin_bottom = 206.13
+rect_rotation = 4.02372
+rect_scale = Vector2( 0.26068, 0.26068 )
+texture = ExtResource( 4 )
+shadow_texture = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/mouseover = SubResource( 1 )

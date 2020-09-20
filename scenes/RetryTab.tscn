@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/retry_tab.png" type="Texture" id=1]
+[ext_resource path="res://scripts/TabButton.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "mouseover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -50.9117, -151.321 ), Vector2( -50.9117, -46.3209 ) ]
+}
+
+[node name="RetryTab" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -50.9117
+margin_top = -151.321
+margin_right = 49.0883
+margin_bottom = 118.679
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/mouseover = SubResource( 1 )

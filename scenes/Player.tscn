@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/foot.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 35.0
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="BaseShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 90 )
+shape = SubResource( 1 )
+
+[node name="FootPivot" type="Node2D" parent="."]
+position = Vector2( 0, 100 )
+
+[node name="FootLPivot" type="Node2D" parent="FootPivot"]
+position = Vector2( 46.6755, 9.60107 )
+
+[node name="FootL" type="Sprite" parent="FootPivot/FootLPivot"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 10.5578, 0 )
+
+[node name="FootRPivot" type="Node2D" parent="FootPivot"]
+position = Vector2( -47.0214, 24.9655 )
+
+[node name="FootR" type="Sprite" parent="FootPivot/FootRPivot"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 10.5578, 0 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, 103 )
+enabled = true

@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/textures/confetti_snip.png" type="Texture" id=1]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+position = Vector2( 724.853, 718.125 )
+z_index = 99
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.8
+texture = ExtResource( 1 )
+emission_shape = 2
+emission_rect_extents = Vector2( 640, 0 )
+direction = Vector2( 0, -1 )
+spread = 30.0
+gravity = Vector2( 0, 980 )
+initial_velocity = 1200.0
+initial_velocity_random = 0.5
+scale_amount = 0.3
+hue_variation = -1.0
+hue_variation_random = 1.0

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/string.png" type="Texture" id=1]
+[ext_resource path="res://scripts/LineDrawing2D.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/drawing.wav" type="AudioStream" id=3]
+
+[node name="LineDrawing2D" type="Control"]
+process_priority = 8
+margin_right = 172.0
+margin_bottom = 112.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+draw_interval = 0.02
+line_tex = ExtResource( 1 )
+audio_stream = ExtResource( 3 )

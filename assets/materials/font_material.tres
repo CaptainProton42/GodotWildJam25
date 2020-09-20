@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/paper_texture.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D paper_texture;
+uniform vec4 color : hint_color;
+
+void fragment() {
+	COLOR = color;
+	COLOR.a = texture(TEXTURE, UV).a;
+	COLOR.a *= texture(paper_texture, 25.0*UV).r;
+}"
+custom_defines = ""
+
+[resource]
+shader = SubResource( 1 )
+shader_param/color = null
+shader_param/paper_texture = ExtResource( 1 )

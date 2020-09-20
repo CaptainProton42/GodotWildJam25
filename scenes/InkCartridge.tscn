@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/InkCartridge.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/ink_cartridge_empty.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/ink_cartridge_progress.png" type="Texture" id=3]
+
+[node name="InkCartridge" type="TextureProgress"]
+min_value = -5.0
+max_value = 120.0
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+tint_progress = Color( 0.564706, 0.72549, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
